@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style>
+			#div1{
+				width:400px;
+				
+				background-color: lightgray;
+			}
+			#text1{
+				width:300px;
+				height:30px;
+			}
+			#text2{
+				width:300px;
+				height:80px;
+				vertical-align: top;
+			}
+			#btn1{
+				margin-left:100px;
+				width:100px;
+				height:30px;
+				background-color: blue;
+				border:none;
+				margin-top:20px;
+			}
+			.class1{
+				margin-left:20px;
+				
+			}
+			.class2{
+				
+				width:100px;
+				height:30px;
+				background-color:  transparent;
+				margin-left:200px;
+				border:none;
+				color:red;
+				
+				
+			}
+		</style>
+	</head>
+	<body>
+		<div id = "div1">
+			姓名:<input type = "text" id = "text1"><br/>
+			内容:<textarea id = "text2" ></textarea><br/>
+			<input type = "button" id = "btn1" value  = "提交"/>
+			<h2>显示留言</h2>
+			<div id = "div2">
+				<div>
+						<div>积云</div>
+					
+						<div class="class1">教育<input type ="button" value= "删除" class="class2"/></div>
+				</div>					
+					
+			</div>
+			<input type = "button" value = "删除全部" id = "btn2"/>
+			
+		</div>
+	</body>
+	<script type = "text/javascript" src = "js/jquery-3.1.1.js"></script>
+	<script type = "text/javascript">
+		$("#btn1").click(function(){
+			//获取文本信息
+			var str1 = $("#text1").val();
+			var str2= $("#text2").val();
+			//清空
+			$("#text1").val("");
+			$("#text2").val("");
+			//判断信息添写是否完整
+			if(str1=="" || str2=="")
+			{
+				alert("信息添写不完整");
+				return;
+			}
+			
+			//创建节点
+			var $div0= $("<div></div>");
+			//
+			var $div01= $("<div></div>").html(str1);
+			var $div02 =$("<div></div>").html(str2);
+			$div02.attr("class","class1");
+			//$div02.addClass("class1");//添加一个类class1
+			
+			var $btn= $("<input type = 'button' value='删除' class='class2'>");
+			//添加删除的捆绑事件
+			$btn.click(function(){
+				$(this).parent().parent().remove();
+				//$(this).parent().prev().remove();
+				//$(this).parent().remove();
+			})
+			$btn.appendTo($div02);
+			
+			$div0.append($div01)
+				.append($div02);
+			
+			$("#div2").append($div0);
+
+			console.log(str1 + "" + str2);
+		})
+		
+		//删除全部
+		$("#btn2").click(function(){
+			//获取div2的所有子元素，将子元素删除
+			$("#div2").children().remove();
+		})
+	</script>
+</html>
